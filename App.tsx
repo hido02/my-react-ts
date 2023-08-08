@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { FCCounter } from './Counter';
 import { GenericList } from './GenericList';
 import './style.css';
+import Counter from './UseState';
 
 const App: React.FC = () => {
   const [count, setCount] = useState<number>(0);
@@ -21,6 +22,7 @@ const App: React.FC = () => {
       <h1>My App</h1>
       <FCCounter label="Count" count={count} onIncrement={onIncrement} />
       <GenericList items={items} itemRenderer={itemRenderer} />
+      <Counter initialCount={0}/>
     </div>
   );
 };
