@@ -1,28 +1,29 @@
-import * as React from 'react';
-import { useState } from 'react';
-import { FCCounter } from './Counter';
-import { GenericList } from './GenericList';
-import './style.css';
-import Counter from './UseState';
+import React, { useState } from 'react';
+import TodoList from './TodoList';
 
 const App: React.FC = () => {
-  const [count, setCount] = useState<number>(0);
-  const onIncrement = () => {
-    setCount(prevCount => prevCount + 1);
-  };
+  const [todos, setTodos] = useState<string[]>([]);
+  const [input, setInput] = useState('');
 
-  const items = ["Item 1", "Item 2", "Item 3"];
-
-  const itemRenderer = (item: string) => {
-    return <div key={item}>{item}</div>;
+  const handleAddTodo = () => {
+    if (input) {
+      setTodos([...todos, input]);
+      setInput('');
+    }
   };
 
   return (
     <div>
-      <h1>My App</h1>
-      <FCCounter label="Count" count={count} onIncrement={onIncrement} />
-      <GenericList items={items} itemRenderer={itemRenderer} />
-      <Counter initialCount={0}/>
+      <h1>Todo List</h1>
+      <div>
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+        <button onClick={handleAddTodo}>Add</button>
+      </div>
+      <TodoList todos={todos} />
     </div>
   );
 };
